@@ -124,6 +124,8 @@ namespace astu::suite2d {
             b2Vec2 lv = boxBody->GetLocalVector(b2Vec2(wvx, wvy));
             return Vector2f(lv.x, lv.y);
         }
+        // Difficult to decide what to do. Should be throw an exception instead?
+        return Vector2f::Zero;
     }
 
     Vector2f CBox2DBody::GetLocalPoint(float wpx, float wpy)
@@ -132,6 +134,8 @@ namespace astu::suite2d {
             b2Vec2 lp = boxBody->GetLocalPoint(b2Vec2(wpx, wpy));
             return Vector2f(lp.x, lp.y);
         }
+        // Difficult to decide what to do. Should be throw an exception instead?
+        return Vector2f::Zero;
     }
 
     void CBox2DBody::ApplyForce(const Vector2f& force)
@@ -139,7 +143,6 @@ namespace astu::suite2d {
         if (boxBody) {
             boxBody->ApplyForceToCenter(b2Vec2(force.x, force.y), true);
         }
-
     }
 
 } // end of namespace
