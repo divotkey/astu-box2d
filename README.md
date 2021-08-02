@@ -1,11 +1,11 @@
-# astu-box2d
-Integrates Erin Catto's Box2D physics engine into AST-Utilities.
+# ASTU-Box2D Integration
+Integrates Erin Catto's Box2D physics engine into AST-Utilities. It contains entity components and entity systems that correspond to the physics abstraction layer in AST-Utilities.
 
 ## Demos-Video
 
 https://user-images.githubusercontent.com/939281/127817506-9a436744-2243-4bb8-98d1-60f21a73f32b.mp4
 
-- [YouTube-Link](https://youtu.be/smFVrGfA70I)
+You can find Video on [YouTube](https://youtu.be/smFVrGfA70I).
 
 ## Acknowledgement
 
