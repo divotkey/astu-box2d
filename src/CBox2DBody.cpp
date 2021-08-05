@@ -6,6 +6,7 @@
  */
 
 // Local includes
+#include <Suite2D/CPose.h>
 #include "CBox2DBody.h"
 
 // Box2D includes
@@ -103,9 +104,15 @@ namespace astu::suite2d {
         if (boxBody) {
             b2Vec2 wv = boxBody->GetWorldVector(b2Vec2(lvx, lvy));
             return Vector2f(wv.x, wv.y);
+        } else if ( HasParent() && GetParent()->HasComponent<CPose>() ) {
+            // Use CPose of out entity.
+            auto& pose = GetParent()->GetComponent<CPose>();
+            Vector2f result(lvx, lvy);
+            return result.Rotate(pose.transform.GetRotation());
+        } else {
+            // Difficult to decide what to do. Throw an exception instead?
+            return Vector2f::Zero;
         }
-        // Difficult to decide what to do. Should be throw an exception instead?
-        return Vector2f::Zero;
     }
 
     Vector2f CBox2DBody::GetWorldPoint(float lpx, float lpy)
@@ -113,9 +120,16 @@ namespace astu::suite2d {
         if (boxBody) {
             b2Vec2 wp = boxBody->GetWorldPoint(b2Vec2(lpx, lpy));
             return Vector2f(wp.x, wp.y);
+        } else if ( HasParent() && GetParent()->HasComponent<CPose>() ) {
+            // Use CPose of out entity.
+            auto& pose = GetParent()->GetComponent<CPose>();
+            Vector2f result(lpx, lpy);
+            return result.Rotate(pose.transform.GetRotation())
+                .Add(pose.transform.GetTranslation());
+        } else {
+            // Difficult to decide what to do. Throw an exception instead?
+            return Vector2f::Zero;
         }
-        // Difficult to decide what to do. Should be throw an exception instead?
-        return Vector2f::Zero;
     }
 
     Vector2f CBox2DBody::GetLocalVector(float wvx, float wvy)
@@ -124,7 +138,7 @@ namespace astu::suite2d {
             b2Vec2 lv = boxBody->GetLocalVector(b2Vec2(wvx, wvy));
             return Vector2f(lv.x, lv.y);
         }
-        // Difficult to decide what to do. Should be throw an exception instead?
+        // Difficult to decide what to do. Throw an exception instead?
         return Vector2f::Zero;
     }
 
@@ -134,7 +148,7 @@ namespace astu::suite2d {
             b2Vec2 lp = boxBody->GetLocalPoint(b2Vec2(wpx, wpy));
             return Vector2f(lp.x, lp.y);
         }
-        // Difficult to decide what to do. Should be throw an exception instead?
+        // Difficult to decide what to do. Throw an exception instead?
         return Vector2f::Zero;
     }
 

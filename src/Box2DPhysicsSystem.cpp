@@ -155,7 +155,9 @@ namespace astu::suite2d {
         for (auto & entity : GetEntityView()) {
             
             auto& body = entity->GetComponent<CBox2DBody>();
-            if (body.GetType() == CBody::Type::Kinematic) {
+            // We must process dynamic bodies as well, some game logic
+            // does rely on this.
+            if (body.GetType() != CBody::Type::Static) {
                 const auto& tx = entity->GetComponent<CPose>().transform;
                 body.boxBody->SetTransform(
                     b2Vec2(tx.GetTranslationX(), tx.GetTranslationY()), 
