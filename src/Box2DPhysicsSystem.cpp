@@ -57,8 +57,9 @@ namespace astu::suite2d {
 
     const EntityFamily Box2DPhysicsSystem::FAMILY = EntityFamily::Create<CBox2DBody, CPose>();
 
-    Box2DPhysicsSystem::Box2DPhysicsSystem()
+    Box2DPhysicsSystem::Box2DPhysicsSystem(int updatePriority)
         : BaseService("Box2D Physics System")
+        , Updatable(updatePriority)
         , OneFamilyEntitySystem(FAMILY)
         , EntityListener(FAMILY)
         , velocityIterations(8)

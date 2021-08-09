@@ -45,8 +45,10 @@ namespace astu::suite2d {
 
         /**
          * Constructor.
+         * 
+         * @param updatePriority    the priority used to update this system
          */
-        Box2DPhysicsSystem();
+        Box2DPhysicsSystem(int updatePriority = Priority::Normal);
 
         /**
          * Virtual destructor.
