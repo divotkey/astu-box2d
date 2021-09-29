@@ -55,6 +55,12 @@ namespace astu::suite2d {
         virtual ~CBox2DBaseCollider() {}
 
         // Inherited via T
+        virtual void OnAddedToEntity(Entity & entity)
+        {
+            T::OnAddedToEntity(entity);
+            entity.AddInterface(*this, typeid(T));
+        }
+
         virtual void SetRestitution(float r) override {
             T::SetRestitution(r);
             if (fixture) {
